@@ -1,0 +1,33 @@
+import viajes.*
+import socios.*
+
+describe "Test Socios "{
+//declaracion objetos
+	//Viajes
+	const playa1 = new Playa(idiomas=["español", "ingles"], largo=1000 )
+	
+	const playa2 = new Playa(idiomas=["español"], largo=2000 )
+	//GYM
+	const gym = new ClaseDeGimnasia(idiomas=["español"])
+	
+	//Socios
+	const roque = new SocioTranquilo(actividadesRealizadas =[playa1, playa2], maximoDeActividades=2, edad=40)
+	
+	const ana = new SocioTranquilo(actividadesRealizadas =[playa1, playa2], maximoDeActividades=3, edad=30)
+	
+//Test Roque
+	test "roque es adorador del sol"{
+		assert.that(roque.esAdoradorDelSol())
+	}
+	
+	test "actividades Esforzadas de roque , una coleccion solo con playa2"{
+		assert.that(roque.actividadesEsforzadas() == [playa2])
+	}
+	
+	test "Ana no es adoradora del sol despues de agregar gym"{
+		ana.registrarActividad(gym)
+		assert.notThat(ana.esAdoradorDelSol())
+	}
+	
+}
+ 

@@ -1,0 +1,73 @@
+import viajes.*
+import socios.*
+
+describe "Test Viajes "{
+//declaracion objetos
+	//Viajes
+	const playa1 = new Playa(idiomas=["español", "ingles"], largo=1000 )
+	
+	const playa2 = new Playa(idiomas=["español", "ingles"], largo=1201 )
+	
+	// Excursiones a Ciudad
+	const excursionACiudad1 = new ExcursionACiudad(idiomas=["español", "ingles"], cuantasAtracciones=6)
+	
+	const excursionACiudad2 = new ExcursionACiudad(idiomas=["español", "ingles"], cuantasAtracciones=4)
+	
+	const excursionACiudad3 = new ExcursionACiudad(idiomas=["español"], cuantasAtracciones=4)
+	
+	//Excursiones a Ciudad Tropical
+	const excursionTropical1 = new ExcursionACiudadTropical(idiomas=["español"], cuantasAtracciones=4)
+	
+	//Trekking
+	const trekking1 = new Trekking(idiomas=["español"], kilometros=100, diasDeSol=130)
+	
+//Test Viaje Playa
+	test "La playa1 NO implica esfuerzo ya que el largo de la playa supera los 1200 metros "{
+		assert.notThat(playa1.implicaEsfuerzo())
+	}
+	
+	test "La playa2  implica esfuerzo ya que el largo de la playa supera los 1200 metros "{
+		assert.that(playa2.implicaEsfuerzo())
+	}
+	
+//Test Excursion A Ciudad
+	test "La excursionACiudad1 implica esfuerzo ya que se visitan entre 5 y 8 atracciones, 6 "{
+		assert.that(excursionACiudad1.implicaEsfuerzo())
+	}
+	
+	test "La excursionACiudad2 NO implica esfuerzo ya que no se visitan entre 5 y 8 atracciones, 4 "{
+		assert.notThat(excursionACiudad2.implicaEsfuerzo())
+	}
+	
+	test "La excursionACiudad2  lleva 2 días"{
+		assert.equals(2, excursionACiudad2.cuantosDiasDura())
+	}
+	
+	test "La excursionACiudad2  es interesante porque tiene mas de 1 idioma"{
+		assert.that(excursionACiudad2.esInteresante())
+	}
+	
+	test "La excursionACiudad3 NO es interesante porque No tiene mas de 1 idioma o tampoco tiene 5 atracciones"{
+		assert.notThat(excursionACiudad3.esInteresante())
+	}
+	
+	test "La excursionTropical1  lleva 3 días"{
+		assert.equals(3, excursionTropical1.cuantosDiasDura())
+	}
+	
+	test "La salida trekking1  lleva 2 días"{
+		assert.equals(2, trekking1.cuantosDiasDura())
+	}
+	
+	test "La salida trekking1 implica esfuerzo"{
+		assert.that(trekking1.implicaEsfuerzo())
+	}
+	
+	test "La salida trekking1 NO sirve para broncearse porque no hay más de 200 días de sol por año"{
+		assert.notThat(trekking1.sirveParaBroncearse())
+	}
+	
+	
+	
+	
+}
